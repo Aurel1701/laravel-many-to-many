@@ -4,7 +4,7 @@
 
 <h2>Create new Post</h2>
 @include('partials.errors')
-<form action="{{route('admin.posts.store')}}" method="post">
+<form action="{{route('admin.posts.store')}}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="mb-4">
         <label for="title">Title</label>
