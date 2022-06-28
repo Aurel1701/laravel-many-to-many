@@ -52,8 +52,11 @@ class PostController extends Controller
         $newPost->body = $data['body'];
         $newPost->author = $data['author'];
         $newPost->save();
+      
+        Mail::to($request->user()->email)->send(new NewPostCreated($newPost));
+        dd($request->user());
         return redirect()->route('admin.posts.index');
-
+        
         // verificare se la richiesta ha un file
         /* if($request->hasfile('cover')){
          $request->validate([
@@ -70,7 +73,7 @@ class PostController extends Controller
 
         //passo all'array di dati validti 
 
-        Mail::to($request->user())->send(new NewPostCreated($newPost));
+        
     }
 
     /**
@@ -117,6 +120,7 @@ class PostController extends Controller
         $post->body = $request->input('body');
         $post->author = $request->input('author');
         $post->save();
+        
         return redirect()->route('admin.posts.index');
     }
 
