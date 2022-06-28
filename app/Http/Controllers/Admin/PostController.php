@@ -32,6 +32,7 @@ class PostController extends Controller
         $categories = Category::all();
         //dd($categories);
         return view('admin.posts.create', compact('categories'));
+        //Mail::to($request->user())->send(new NewPostCreated($newPost));
     }
 
     /**
@@ -52,6 +53,24 @@ class PostController extends Controller
         $newPost->author = $data['author'];
         $newPost->save();
         return redirect()->route('admin.posts.index');
+
+        // verificare se la richiesta ha un file
+        /* if($request->hasfile('cover')){
+         $request->validate([
+            'cover'
+
+        ]);
+        }
+         */
+        //valida file
+
+        // salvo nel filesystem
+
+        //recipero percorso
+
+        //passo all'array di dati validti 
+
+        Mail::to($request->user())->send(new NewPostCreated($newPost));
     }
 
     /**
