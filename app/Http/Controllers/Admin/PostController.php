@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Mail\NewPostCreated;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 use App\Post;
 
@@ -54,28 +55,22 @@ class PostController extends Controller
         $newPost->body = $data['body'];
         $newPost->author = $data['author'];
         $newPost->save();
-      
         Mail::to($request->user()->email)->send(new NewPostCreated($newPost));
         //dd($request->user());
-        return redirect()->route('admin.posts.index');
+        
         
         // verificare se la richiesta ha un file
-        /* if($request->hasfile('cover')){
+         if($request->hasfile('cover')){
          $request->validate([
-            'cover'
-
+            'cover' => 'nullable',
         ]);
         }
-         */
-        //valida file
-
-        // salvo nel filesystem
-
-        //recipero percorso
-
+        //recupero percorso
+        $path =Storage::put('post_images', $request->cover);
         //passo all'array di dati validti 
+        $newPost['cover'];
 
-        
+        return redirect()->route('admin.posts.index');
     }
 
     /**
