@@ -19,11 +19,11 @@
 
     <div class="">
        <div class="media">
-            <img class="shadow" width="150" src="{{$post->cover}}" alt="{{$post->title}}">
+            <img class="shadow" width="150" src="{{('storage/' . $post->cover)}}" alt="{{$post->title}}">
       </div>
       <div class="mb-4">
         <label for="cover" class="form-label me-2">cover</label>
-        <input type="text" name="cover" id="cover" class="form-control  @error('cover') is-invalid @enderror" placeholder="Insert cover" value="{{old('cover', $post->cover)}}">
+        <input type="file" name="cover" id="cover" class="form-control  @error('cover') is-invalid @enderror" placeholder="Insert cover" value="{{old('cover', $post->cover)}}">
       </div>
     </div>
    
