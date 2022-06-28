@@ -56,7 +56,7 @@ class PostController extends Controller
         $newPost->save();
       
         Mail::to($request->user()->email)->send(new NewPostCreated($newPost));
-        dd($request->user());
+        //dd($request->user());
         return redirect()->route('admin.posts.index');
         
         // verificare se la richiesta ha un file
