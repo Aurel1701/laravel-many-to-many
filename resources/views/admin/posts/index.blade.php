@@ -31,7 +31,7 @@
                 <td scope="row">{{$post->id}}</td>
                 <td>{{$post->title}}</td>
                 <td>{{$post->excerpt}}</td>
-                <td><img width="150" src="{{asset('storage/' . $post->cover)}}" alt="Cover image {{$post->title}}"></td>
+                <td><img width="150" src="{{asset('storage/post_images' . $post->cover)}}" alt="Cover image {{$post->title}}"></td>
                 <td>{{$post->body}}</td>
                 <td>{{$post->author}}</td>
                 <td>
