@@ -57,7 +57,7 @@ class PostController extends Controller
         $newPost->save();
         Mail::to($request->user()->email)->send(new NewPostCreated($newPost));
         //dd($request->user());
-        
+        return redirect()->route('admin.posts.index');
         
         // verificare se la richiesta ha un file
          if($request->hasfile('cover')){
@@ -65,12 +65,13 @@ class PostController extends Controller
             'cover' => 'nullable',
         ]);
         }
+        $newPost->cover = $path;
         //recupero percorso
         $path =Storage::put('post_images', $request->cover);
         //passo all'array di dati validti 
         $newPost['cover'];
 
-        return redirect()->route('admin.posts.index');
+        
     }
 
     /**

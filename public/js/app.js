@@ -1914,9 +1914,75 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App",
-  components: {}
+  components: {},
+  data: function data() {
+    return {
+      posts: '',
+      postResponse: ''
+    };
+  },
+  methods: {
+    getAllPosts: function getAllPosts(postPage) {
+      var _this = this;
+
+      axios.get('/api/posts', {
+        params: {
+          page: postPage
+        }
+      }).then(function (response) {
+        console.log(response); //this.posts = response.data.posts
+
+        _this.postResponse = response.data.posts;
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getAllPosts(2);
+  }
 });
 
 /***/ }),
@@ -37507,14 +37573,125 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("section", { staticClass: "posts" }, [
+      _c("div", { staticClass: "container" }, [
+        _c(
+          "div",
+          { staticClass: "row row-cols-1 row cols-sm-2 row cols-md-3" },
+          _vm._l(_vm.postResponse, function (post) {
+            return _c("div", { key: post.id, staticClass: "col" }, [
+              _c("div", { staticClass: "product card" }, [
+                _c("img", { attrs: { src: post.cover, alt: post.title } }),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h3", [_vm._v(_vm._s(post.title))]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(_vm._s(post.body))]),
+                ]),
+              ]),
+            ])
+          }),
+          0
+        ),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "pagination justify-content-center" }, [
+        _c("nav", { attrs: { "aria-label": "Page navigation" } }, [
+          _c("ul", { staticClass: "pagination justify-content-center" }, [
+            _c("li", { staticClass: "page-item disabled" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  attrs: { href: "#", "aria-label": "Previous" },
+                  on: {
+                    click: function ($event) {
+                      return _vm.getAllPosts(_vm.postResponse.currentPage - 1)
+                    },
+                  },
+                },
+                [
+                  _c("span", { attrs: { "aria-hidden": "true" } }, [
+                    _vm._v("«"),
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "visually-hidden" }, [
+                    _vm._v("Previous"),
+                  ]),
+                ]
+              ),
+            ]),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _vm._m(2),
+            _vm._v(" "),
+            _c("li", { staticClass: "page-item" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  attrs: { href: "#", "aria-label": "Next" },
+                  on: {
+                    click: function ($event) {
+                      return _vm.getAllPosts(_vm.postResponse.currentPage + 1)
+                    },
+                  },
+                },
+                [
+                  _c("span", { attrs: { "aria-hidden": "true" } }, [
+                    _vm._v("»"),
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "visually-hidden" }, [
+                    _vm._v("Next"),
+                  ]),
+                ]
+              ),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]),
+  ])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h1", [_vm._v("Hello Aurel")])])
+    return _c("div", { staticClass: " title text-center bg-dark" }, [
+      _c("h1", { staticClass: "text-danger" }, [_vm._v("Boolpress Blog")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "text-danger" }, [
+        _vm._v(
+          "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam necessitatibus magni\n      corrupti fugit\n      dignissimos. Accusantium beatae nostrum doloremque deserunt."
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "page-item active" }, [
+      _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+        _vm._v("1"),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "page-item" }, [
+      _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+        _vm._v("2"),
+      ]),
+    ])
   },
 ]
 render._withStripped = true
